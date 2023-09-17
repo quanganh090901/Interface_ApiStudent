@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <title>Students</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link type="text/css" rel="stylesheet" href="bootstrap.min.css" th:href="@{bootstrap.min.css}"/>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+      font-family: sans-serif;
+      font-weight: 100;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    table {
+      width: 800px;
+      border-collapse: collapse;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    th,
+    td {
+      padding: 15px;
+      background-color: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    th {
+      text-align: left;
+    }
+
+      th {
+        background-color: #55608f;
+      }
+
+
+      tr {
+        &:hover {
+          background-color: rgba(255,255,255,0.3);
+        }
+      }
+      td {
+        position: relative;
+        &:hover {
+          &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -9999px;
+            bottom: -9999px;
+            background-color: rgba(255,255,255,0.2);
+            z-index: -1;
+          }
+        }
+      }
+
+  </style>
+</head>
+<body>
+<div class="col-3"></div>
+<div class="container col-6">
+    <h1 style="align-items: center;display: flex;justify-content: center; color : white">Manage Student</h1>
+  <table class="table table-active">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Họ Tên</th>
+        <th>Giới Tính</th>
+        <th>Ngày Sinh</th>
+        <th>Địa Chỉ</th>
+        <th>Mã Lớp</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="student : ${student}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.HoTen}"></td>
+        <td th:text="${student.GioiTinh}"></td>
+        <td th:text="${student.NgaySinh}"></td>
+        <td th:text="${student.DiaChi}"></td>
+        <td th:text="${student.MaLop}"></td>
+        <td>
+          <a th:href="@{'/student/update/' + ${student.id}}" class="btn btn-primary">Edit</a>
+          <a th:href="@{'/student/delete/' + ${student.id}}" class="btn btn-danger">Delete</a>
+        </td></tr>
+    </tbody>
+  </table>
+  <a href="/student/add" class="btn btn-success">Add User</a>
+</div>
+</body>
+</html>
