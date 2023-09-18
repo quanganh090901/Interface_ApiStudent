@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,11 +40,10 @@ public class StudentController {
     }
     @GetMapping(value = "/student/add")
     public String createNewStudent(Model model){
-        model.addAttribute("student", new studentEntity());
         List<classEntity> classAll = classRepository.findAll();
+        model.addAttribute("student", new studentEntity());
         model.addAttribute("class",classAll);
         return "student/add";
-//        return studentService.save(model);
     }
 
     @PostMapping(value = "/student/save")

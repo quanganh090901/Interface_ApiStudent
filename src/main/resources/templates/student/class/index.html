@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
-  <title>Students</title>
+  <title>All Of Class</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <link type="text/css" rel="stylesheet" href="bootstrap.min.css" th:href="@{bootstrap.min.css}"/>
   <style>
@@ -73,35 +73,26 @@
 <body>
 <div class="col-3"></div>
 <div class="container col-6">
-    <h1 style="align-items: center;display: flex;justify-content: center; color : white">Manage Student</h1>
+    <h1 style="align-items: center;display: flex;justify-content: center; color : white">Manage Class</h1>
   <table class="table table-active">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Họ Tên</th>
-        <th>Giới Tính</th>
-        <th>Ngày Sinh</th>
-        <th>Địa Chỉ</th>
         <th>Mã Lớp</th>
+        <th>Tên Lớp</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr th:each="student : ${student}">
-        <td th:text="${student.id}"></td>
-        <td th:text="${student.HoTen}"></td>
-        <td th:text="${student.GioiTinh}"></td>
-        <td th:text="${#dates.format(student.NgaySinh,'dd-MM-yyyy')}"></td>
-        <td th:text="${student.DiaChi}"></td>
-        <td th:text="${student.MaLop}"></td>
+      <tr th:each="class : ${class}">
+        <td th:text="${class.id}"></td>
+        <td th:text="${class.tenLop}"></td>
         <td>
-          <a th:href="@{'/student/update/' + ${student.id}}" class="btn btn-primary">Edit</a>
-          <a th:href="@{'/student/delete/' + ${student.id}}" onclick="return myFunction()" class="btn btn-danger">Delete</a>
+          <a th:href="@{'/class/update/' + ${class.id}}" class="btn btn-primary">Edit</a>
+          <a th:href="@{'/class/delete/' + ${class.id}}" onclick="return myFunction()" class="btn btn-danger">Delete</a>
         </td></tr>
     </tbody>
   </table>
-  <a href="/student/add" class="btn btn-success">Add User</a>
-  <a href="/class/add" class="btn btn-success">Add Class</a>
+  <a href="/class/add" class="btn btn-success">Add User</a>
 </div>
 <script th:inline="javascript">
   function myFunction() {

@@ -67,7 +67,7 @@ public class studentCustomRepoImp implements studentCustomRepo {
             ArrayList result = new ArrayList();
             for (Object[] obj : list){
                 studentDto de = new studentDto(
-                        (String) obj[0],(String) obj [1],(Integer) obj [2],(String) obj[3],(Integer) obj[4]);
+                        (String) obj[0],(String) obj [1],(Date) obj [2],(String) obj[3],(Integer) obj[4]);
                 result.add(de);
             }
             return result;

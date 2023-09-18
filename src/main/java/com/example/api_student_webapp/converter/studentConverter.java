@@ -4,6 +4,8 @@ import com.example.api_student_webapp.dto.studentDto;
 import com.example.api_student_webapp.models.studentEntity;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+
 @Component
 public class studentConverter {
     public studentEntity toEntity(studentDto dto){

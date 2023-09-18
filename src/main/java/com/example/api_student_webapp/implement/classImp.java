@@ -42,7 +42,6 @@ public class classImp implements classService {
         }else {
             classEntity = classConverter.toEntity(classDto);
         }
-//        studentEntity studentEntity = studentConverter.toEntity(studentDto);
         classEntity = classRepository.save(classEntity);
         return classConverter.toDto(classEntity);
     }

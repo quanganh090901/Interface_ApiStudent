@@ -2,12 +2,15 @@ package com.example.api_student_webapp.Controllers;
 
 import com.example.api_student_webapp.dto.classDto;
 import com.example.api_student_webapp.dto.classMapDto;
+import com.example.api_student_webapp.dto.studentDto;
 import com.example.api_student_webapp.models.classEntity;
+import com.example.api_student_webapp.models.studentEntity;
 import com.example.api_student_webapp.service.classService;
 import com.example.api_student_webapp.studentRepositories.classRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -19,35 +22,44 @@ import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin
-@RestController
+@Controller
 public class ClassController {
     @Autowired
     classRepository classRepository;
     @Autowired
     classService classService;
-    @RequestMapping(value = "/class",method = RequestMethod.GET)
-    public List<classEntity> getAllNotes() {
-        return classRepository.findAll();
+    @GetMapping(value = "/class")
+    public String getAllStudent(Model model) {
+        List<classEntity> classEntities = classRepository.findAll();
+        model.addAttribute("class",classEntities);
+        return "student/class/index";
     }
-    @PostMapping(value = "/class")
-    public classDto createClass(@RequestBody classDto model){
-        return classService.save(model);
+    @GetMapping(value = "/class/add")
+    public String createClass(Model model){
+        model.addAttribute("class", new classEntity());
+        return "student/class/add";
+    }
+    @PostMapping(value = "/class/save")
+    public String saveClass(classDto classDto){
+        classService.save(classDto);
+        return "redirect:/class";
+    }
+    @RequestMapping(value = "class/update/{id}",method = RequestMethod.GET)
+    public String updateStudent(@PathVariable("id") int id, Model model){
+        Optional<classEntity> result = classRepository.findById(id);
+        model.addAttribute("class", result);
+        return "student/class/update" ;
     }
 
-    @PutMapping(value = "class/{classId}")
-    public classDto updateClass(@RequestBody classDto model, @PathVariable("classId") int classId){
-        model.setId(classId);
-        return classService.save(model);
+    @RequestMapping(value = "/class/delete/{id}", method = RequestMethod.GET )
+    public String deleteStudent(@PathVariable("id")int id){
+        classService.deleteById(id);
+        return "redirect:/class";
     }
 
-    @DeleteMapping(value = "/class/{classId}")
-    public void deleteClass(@PathVariable("classId")int classId){
-        classService.deleteById(classId);
-    }
-
-    @RequestMapping(value = "/class/{classId}",method = RequestMethod.GET)
-    public Optional<classEntity> doView(@PathVariable("classId") int classId){
-        return classRepository.findById(classId);
+    @RequestMapping(value = "/class/{id}",method = RequestMethod.GET)
+    public Optional<classEntity> doView(@PathVariable("id") int id){
+        return classRepository.findById(id);
     }
 //
 //    @RequestMapping(value = "/home")

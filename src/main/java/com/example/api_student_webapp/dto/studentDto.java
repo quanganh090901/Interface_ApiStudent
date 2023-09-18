@@ -1,14 +1,17 @@
 package com.example.api_student_webapp.dto;
 
 import jakarta.persistence.Column;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.List;
 
 public class studentDto {
     private Integer id;
     private String HoTen;
     private String GioiTinh;
-    private Integer NgaySinh;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date NgaySinh;
     private String DiaChi;
     private Integer MaLop;
 
@@ -25,7 +28,7 @@ public class studentDto {
     public studentDto() {
     }
 
-    public studentDto(String hoTen, String gioiTinh, Integer ngaySinh, String diaChi, Integer maLop) {
+    public studentDto(String hoTen, String gioiTinh, Date ngaySinh, String diaChi, Integer maLop) {
         HoTen = hoTen;
         GioiTinh = gioiTinh;
         NgaySinh = ngaySinh;
@@ -57,11 +60,11 @@ public class studentDto {
         GioiTinh = gioiTinh;
     }
 
-    public Integer getNgaySinh() {
+    public Date getNgaySinh() {
         return NgaySinh;
     }
 
-    public void setNgaySinh(Integer ngaySinh) {
+    public void setNgaySinh(Date ngaySinh) {
         NgaySinh = ngaySinh;
     }
 

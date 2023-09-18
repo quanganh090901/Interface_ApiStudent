@@ -36,7 +36,6 @@ public class studentImplement implements studentService {
         }else {
             studentEntity = studentConverter.toEntity(studentDto);
         }
-//        studentEntity studentEntity = studentConverter.toEntity(studentDto);
         studentEntity = studentRepository.save(studentEntity);
         return studentConverter.toDto(studentEntity);
     }

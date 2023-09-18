@@ -1,5 +1,8 @@
 package com.example.api_student_webapp.models;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "hocsinh")
@@ -14,7 +17,8 @@ public class studentEntity {
     @Column(name = "GioiTinh")
     private String GioiTinh;
     @Column(name = "NgaySinh")
-    private Integer NgaySinh;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date NgaySinh;
     @Column(name = "DiaChi")
     private String DiaChi;
     @Column(name = "ma_lop")
@@ -27,7 +31,7 @@ public class studentEntity {
     public studentEntity() {
     }
 
-    public studentEntity(String hoTen, String gioiTinh, Integer ngaySinh, String diaChi, Integer maLop) {
+    public studentEntity(String hoTen, String gioiTinh, Date ngaySinh, String diaChi, Integer maLop) {
         HoTen = hoTen;
         GioiTinh = gioiTinh;
         NgaySinh = ngaySinh;
@@ -59,11 +63,11 @@ public class studentEntity {
         GioiTinh = gioiTinh;
     }
 
-    public Integer getNgaySinh() {
+    public Date getNgaySinh() {
         return NgaySinh;
     }
 
-    public void setNgaySinh(Integer ngaySinh) {
+    public void setNgaySinh(Date ngaySinh) {
         NgaySinh = ngaySinh;
     }
 
